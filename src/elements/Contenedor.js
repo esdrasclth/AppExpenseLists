@@ -1,5 +1,5 @@
 import styled from 'styled-components'
- 
+
 const Contenedor = styled.div`
     background: #fff;
     width: 90%;

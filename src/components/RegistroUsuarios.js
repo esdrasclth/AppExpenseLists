@@ -1,9 +1,9 @@
 import React from 'react'
 
 const RegistroUsuario = () => {
-    return ( 
+    return (
         <h1>Registro Usuario</h1>
-     );
+    );
 }
- 
+
 export default RegistroUsuario;
