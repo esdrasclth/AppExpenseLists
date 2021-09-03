@@ -6,6 +6,8 @@ import { Header, Titulo, ContenedorHeader } from '../elements/Header'
 import { Formulario, Input, ContenedorBoton } from '../elements/ElementosDeFormulario'
 import Boton from '../elements/Boton'
 import { ReactComponent as SvgLogin } from '../img/registro.svg'
+import { auth } from '../firebase/firebaseConfig'
+import { useHistory } from 'react-router'
 
 const Svg = styled(SvgLogin)`
     width: 100%;
@@ -15,6 +17,7 @@ const Svg = styled(SvgLogin)`
 
 const RegistroUsuario = () => {
 
+    const history = useHistory();
     const [correo, establecerCorreo] = useState('');
     const [password, establecerPassword] = useState('');
     const [password2, establecerPassword2] = useState('');
@@ -38,7 +41,7 @@ const RegistroUsuario = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Comprobamos del lado del cliente que el correo se valido
@@ -60,7 +63,29 @@ const RegistroUsuario = () => {
             return;
         }
 
-        console.log('Usuario registrado')
+        try {
+            await auth.createUserWithEmailAndPassword(correo, password)
+            console.log('Usuario registrado con exito');
+            history.push('/');
+
+        } catch (error) {
+            let mensaje;
+            switch (error.code) {
+                case 'auth/invalid-password':
+                    mensaje = 'La contraseña tiene que ser de al menos 6 caracteres.'
+                    break;
+                case 'auth/email-already-in-use':
+                    mensaje = 'Ya existe una cuenta con el correo electrónico proporcionado.'
+                    break;
+                case 'auth/invalid-email':
+                    mensaje = 'El correo electrónico no es válido.'
+                    break;
+                default:
+                    mensaje = 'Hubo un error al intentar crear la cuenta.'
+                    break;
+            }
+            console.log(mensaje);
+        }
     }
 
     return (
