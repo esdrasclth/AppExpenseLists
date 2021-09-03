@@ -1,8 +1,21 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
+
+import BtnRegresar from '../elements/BtnRegresar'
+import { Header, Titulo } from '../elements/Header'
 
 const ListaDeGastos = () => {
     return (
-        <h1>Lista de gastos</h1>
+        <>
+            <Helmet>
+                <title>Lista de Gastos</title>
+            </Helmet>
+
+            <Header>
+                <BtnRegresar />
+                <Titulo>Lista de Gastos</Titulo>
+            </Header>
+        </>
     );
 }
 
