@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import styled from 'styled-components'
+import { useHistory } from 'react-router'
 
 import { Header, Titulo, ContenedorHeader } from '../elements/Header'
 import { Formulario, Input, ContenedorBoton } from '../elements/ElementosDeFormulario'
 import Boton from '../elements/Boton'
 import { ReactComponent as SvgLogin } from '../img/registro.svg'
 import { auth } from '../firebase/firebaseConfig'
-import { useHistory } from 'react-router'
+import Alerta from '../elements/Alerta'
 
 const Svg = styled(SvgLogin)`
     width: 100%;
@@ -21,6 +22,8 @@ const RegistroUsuario = () => {
     const [correo, establecerCorreo] = useState('');
     const [password, establecerPassword] = useState('');
     const [password2, establecerPassword2] = useState('');
+    const [estadoAlerta, cambiarEstadoAlerta] = useState(false);
+    const [alerta, cambiarAlerta] = useState({});
 
     const handleChange = (e) => {
         switch (e.target.name) {
@@ -43,23 +46,28 @@ const RegistroUsuario = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        cambiarEstadoAlerta(false);
+        cambiarAlerta({});
 
         // Comprobamos del lado del cliente que el correo se valido
         const expresionRegular = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
         if (!expresionRegular.test(correo)) {
-            console.log('Por favor ingresa algun correo electronico valido')
+            cambiarEstadoAlerta(true);
+            cambiarAlerta({tipo: 'error', mensaje: 'Por favor ingresa un correo electronico valido.'})
             return;
         }
 
         // Comprobamos que todos los campos esten completados
         if (correo === '' || password === '' || password2 === '') {
-            console.log('Por favor rellena todos los datos')
+            cambiarEstadoAlerta(true);
+            cambiarAlerta({tipo: 'error', mensaje: 'Por favor rellena todos los datos.'})
             return;
         }
 
         // Comprobamos que ambas contraseñas sean iguales
         if (password !== password2) {
-            console.log('Las contraseñas no son iguales')
+            cambiarEstadoAlerta(true);
+            cambiarAlerta({tipo: 'error', mensaje: 'Las contraseñas no son iguales.'})
             return;
         }
 
@@ -69,6 +77,7 @@ const RegistroUsuario = () => {
             history.push('/');
 
         } catch (error) {
+            cambiarEstadoAlerta(true);
             let mensaje;
             switch (error.code) {
                 case 'auth/invalid-password':
@@ -84,7 +93,8 @@ const RegistroUsuario = () => {
                     mensaje = 'Hubo un error al intentar crear la cuenta.'
                     break;
             }
-            console.log(mensaje);
+
+            cambiarAlerta({tipo: 'error', mensaje: mensaje})
         }
     }
 
@@ -131,6 +141,13 @@ const RegistroUsuario = () => {
                     <Boton as="button" primario type="submit">Crear Cuenta</Boton>
                 </ContenedorBoton>
             </Formulario>
+
+            <Alerta 
+                tipo={alerta.tipo} 
+                mensaje={alerta.mensaje} 
+                estadoAlerta={estadoAlerta} 
+                cambiarEstadoAlerta={cambiarEstadoAlerta} 
+            />
         </>
     );
 }
