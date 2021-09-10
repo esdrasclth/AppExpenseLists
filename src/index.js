@@ -12,6 +12,7 @@ import EditarGasto from './components/EditarGasto'
 import GastosPorCategoria from './components/GastosPorCategoria'
 import favicon from './img/logo.png';
 import Fondo from './elements/Fondo'
+import { AuthProvider } from './contexts/AuthContext';
 
 import './index.css';
 import App from './App';
@@ -31,18 +32,20 @@ const Index = () => {
         <link rel="shortcut icon" href={favicon} type="image/x-icon" />
       </Helmet>
 
-      <BrowserRouter>
-        <Contenedor>
-          <Switch>
-            <Route path="/iniciar-sesion" component={InicioSesion} />
-            <Route path="/crear-cuenta" component={RegistroUsuario} />
-            <Route path="/categorias" component={GastosPorCategoria} />
-            <Route path="/lista" component={ListaDeGastos} />
-            <Route path="/editar/:id" component={EditarGasto} />
-            <Route path="/" component={App} />
-          </Switch>
-        </Contenedor>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Contenedor>
+            <Switch>
+              <Route path="/iniciar-sesion" component={InicioSesion} />
+              <Route path="/crear-cuenta" component={RegistroUsuario} />
+              <Route path="/categorias" component={GastosPorCategoria} />
+              <Route path="/lista" component={ListaDeGastos} />
+              <Route path="/editar/:id" component={EditarGasto} />
+              <Route path="/" component={App} />
+            </Switch>
+          </Contenedor>
+        </BrowserRouter>
+      </AuthProvider>
 
       <Fondo />
     </>
