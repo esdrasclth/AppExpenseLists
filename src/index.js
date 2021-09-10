@@ -13,6 +13,7 @@ import GastosPorCategoria from './components/GastosPorCategoria'
 import favicon from './img/logo.png';
 import Fondo from './elements/Fondo'
 import { AuthProvider } from './contexts/AuthContext';
+import RutaPrivada from './components/RutaPrivada';
 
 import './index.css';
 import App from './App';
@@ -38,10 +39,22 @@ const Index = () => {
             <Switch>
               <Route path="/iniciar-sesion" component={InicioSesion} />
               <Route path="/crear-cuenta" component={RegistroUsuario} />
-              <Route path="/categorias" component={GastosPorCategoria} />
-              <Route path="/lista" component={ListaDeGastos} />
-              <Route path="/editar/:id" component={EditarGasto} />
-              <Route path="/" component={App} />
+
+              <RutaPrivada path="/categorias">
+                <GastosPorCategoria />
+              </RutaPrivada>
+
+              <RutaPrivada path="/lista">
+                <ListaDeGastos />
+              </RutaPrivada>
+
+              <RutaPrivada path="/editar/:id">
+                <EditarGasto />
+              </RutaPrivada>
+
+              <RutaPrivada path="/">
+                <App />
+              </RutaPrivada>
             </Switch>
           </Contenedor>
         </BrowserRouter>
