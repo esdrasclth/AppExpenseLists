@@ -114,11 +114,11 @@ const IniciSesion = () => {
                 </ContenedorBoton>
             </Formulario>
 
-            <Alerta 
-                tipo={alerta.tipo} 
-                mensaje={alerta.mensaje} 
-                estadoAlerta={estadoAlerta} 
-                cambiarEstadoAlerta={cambiarEstadoAlerta} 
+            <Alerta
+                tipo={alerta.tipo}
+                mensaje={alerta.mensaje}
+                estadoAlerta={estadoAlerta}
+                cambiarEstadoAlerta={cambiarEstadoAlerta}
             />
         </>
     );

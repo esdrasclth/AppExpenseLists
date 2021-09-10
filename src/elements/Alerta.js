@@ -13,7 +13,7 @@ const Alerta = ({ tipo, mensaje, estadoAlerta, cambiarEstadoAlerta }) => {
             }, 4000);
         }
 
-        return(() => clearTimeout(tiempo));
+        return (() => clearTimeout(tiempo));
     }, [estadoAlerta, cambiarEstadoAlerta])
 
     return (

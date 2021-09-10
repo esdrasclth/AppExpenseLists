@@ -53,21 +53,21 @@ const RegistroUsuario = () => {
         const expresionRegular = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
         if (!expresionRegular.test(correo)) {
             cambiarEstadoAlerta(true);
-            cambiarAlerta({tipo: 'error', mensaje: 'Por favor ingresa un correo electronico valido.'})
+            cambiarAlerta({ tipo: 'error', mensaje: 'Por favor ingresa un correo electronico valido.' })
             return;
         }
 
         // Comprobamos que todos los campos esten completados
         if (correo === '' || password === '' || password2 === '') {
             cambiarEstadoAlerta(true);
-            cambiarAlerta({tipo: 'error', mensaje: 'Por favor rellena todos los datos.'})
+            cambiarAlerta({ tipo: 'error', mensaje: 'Por favor rellena todos los datos.' })
             return;
         }
 
         // Comprobamos que ambas contraseñas sean iguales
         if (password !== password2) {
             cambiarEstadoAlerta(true);
-            cambiarAlerta({tipo: 'error', mensaje: 'Las contraseñas no son iguales.'})
+            cambiarAlerta({ tipo: 'error', mensaje: 'Las contraseñas no son iguales.' })
             return;
         }
 
@@ -94,7 +94,7 @@ const RegistroUsuario = () => {
                     break;
             }
 
-            cambiarAlerta({tipo: 'error', mensaje: mensaje})
+            cambiarAlerta({ tipo: 'error', mensaje: mensaje })
         }
     }
 
@@ -142,11 +142,11 @@ const RegistroUsuario = () => {
                 </ContenedorBoton>
             </Formulario>
 
-            <Alerta 
-                tipo={alerta.tipo} 
-                mensaje={alerta.mensaje} 
-                estadoAlerta={estadoAlerta} 
-                cambiarEstadoAlerta={cambiarEstadoAlerta} 
+            <Alerta
+                tipo={alerta.tipo}
+                mensaje={alerta.mensaje}
+                estadoAlerta={estadoAlerta}
+                cambiarEstadoAlerta={cambiarEstadoAlerta}
             />
         </>
     );

@@ -9,7 +9,7 @@ const useAuth = () => {
     return useContext(AuthContext);
 }
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
 
     const [usuario, cambiarUsuario] = useState();
 
@@ -27,11 +27,11 @@ const AuthProvider = ({children}) => {
         return cancelarSuscripcion;
     })
 
-    return (  
-        <AuthContext.Provider value={{usuario: usuario}}>
+    return (
+        <AuthContext.Provider value={{ usuario: usuario }}>
             {!cargando && children}
         </AuthContext.Provider>
-     );
+    );
 }
- 
-export {AuthProvider, AuthContext, useAuth};
+
+export { AuthProvider, AuthContext, useAuth };
