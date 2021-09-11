@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import getUnixTime from 'date-fns/getUnixTime'
+import fromUnixTime from 'date-fns/fromUnixTime'
+
 import Boton from '../elements/Boton'
 import { ReactComponent as IconoPlus } from '../img/plus.svg'
 import { ContenedorFiltros, Formulario, Input, InputGrande, ContenedorBoton } from '../elements/ElementosDeFormulario'
 import SelectCategorias from './SelectCategoria'
 import DatePicker from './DatePicker'
+import agregarGasto from '../firebase/agregarGasto'
+import { useAuth } from '../contexts/AuthContext'
 
 const FormularioGasto = () => {
 
@@ -11,6 +16,7 @@ const FormularioGasto = () => {
     const [inputCantidad, cambiarInputCantidad] = useState('');
     const [categoria, cambiarCategoria] = useState('hogar');
     const [fecha, cambiarFecha] = useState(new Date());
+    const {usuario} = useAuth();
 
     const handleChange = (e) => {
         if (e.target.name === 'descripcion') {
@@ -20,8 +26,21 @@ const FormularioGasto = () => {
         }
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        let cantidad = parseFloat(inputCantidad).toFixed(2);
+        agregarGasto({
+            categoria: categoria,
+            descripcion: inputDescripcion,
+            cantidad: cantidad,
+            fecha: getUnixTime(fecha),
+            uidUsuario: usuario.uid
+        });
+    }
+
     return (
-        <Formulario>
+        <Formulario onSubmit={handleSubmit}>
             <ContenedorFiltros>
                 <SelectCategorias categoria={categoria} cambiarCategoria={cambiarCategoria} />
                 <DatePicker fecha={fecha} cambiarFecha={cambiarFecha} />
