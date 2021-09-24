@@ -27,6 +27,7 @@ import {
     ContenedorSubtitulo,
     Subtitulo
 } from '../elements/ElementosDeLista'
+import borrarGasto from '../firebase/borrarGasto'
 
 const ListaDeGastos = () => {
 
@@ -81,7 +82,7 @@ const ListaDeGastos = () => {
 
                                 <ContenedorBotones>
                                     <BotonAccion as={Link} to={`/editar/${gasto.id}`}> <IconoEditar /> </BotonAccion>
-                                    <BotonAccion> <IconoBorrar /> </BotonAccion>
+                                    <BotonAccion onClick={() => borrarGasto(gasto.id)}> <IconoBorrar /> </BotonAccion>
                                 </ContenedorBotones>
                             </ElementoLista>
                         </div>
