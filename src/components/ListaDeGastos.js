@@ -1,8 +1,8 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
-import {format, fromUnixTime} from 'date-fns'
-import {es} from 'date-fns/locale'
+import { format, fromUnixTime } from 'date-fns'
+import { es } from 'date-fns/locale'
 
 import Boton from '../elements/Boton'
 import BtnRegresar from '../elements/BtnRegresar'
@@ -16,8 +16,6 @@ import { ReactComponent as IconoBorrar } from '../img/borrar.svg'
 import {
     Lista,
     ElementoLista,
-    ListaDeCategorias,
-    ElementoListaCategorias,
     Categoria,
     Descripcion,
     Valor,
@@ -32,16 +30,16 @@ import {
 
 const ListaDeGastos = () => {
 
-    const [gastos] = useObtenerGastos();
+    const [gastos, obtenerMasGastos, hayMasPorCargar] = useObtenerGastos();
 
     const formatearFecha = (fecha) => {
-        return format(fromUnixTime(fecha), "dd 'de' MMMM 'de' yyyy", {locale: es});
+        return format(fromUnixTime(fecha), "dd 'de' MMMM 'de' yyyy", { locale: es });
     }
 
     const fechaEsIgual = (gastos, index, gasto) => {
         if (index !== 0) {
             const fechaActual = formatearFecha(gasto.fecha);
-            const fechaGastoAnterior =  formatearFecha(gastos[index - 1].fecha);
+            const fechaGastoAnterior = formatearFecha(gastos[index - 1].fecha);
 
             if (fechaActual === fechaGastoAnterior) {
                 return true;
@@ -66,7 +64,7 @@ const ListaDeGastos = () => {
                 {gastos.map((gasto, index) => {
                     return (
                         <div key={gasto.id}>
-                            {!fechaEsIgual(gastos, index,  gasto) && <Fecha>{formatearFecha(gasto.fecha)}</Fecha>}
+                            {!fechaEsIgual(gastos, index, gasto) && <Fecha>{formatearFecha(gasto.fecha)}</Fecha>}
                             <ElementoLista key={gasto.id}>
                                 <Categoria>
                                     <IconoCategoria id={gasto.categoria} />
@@ -90,9 +88,12 @@ const ListaDeGastos = () => {
                     );
                 })}
 
-                <ContenedorBotonCentral>
-                    <BotonCargarMas> Cargar Más </BotonCargarMas>
-                </ContenedorBotonCentral>
+                {hayMasPorCargar &&
+                    <ContenedorBotonCentral>
+                        <BotonCargarMas onClick={() => obtenerMasGastos()}> Cargar Más </BotonCargarMas>
+                    </ContenedorBotonCentral>
+                }
+
 
                 {gastos.length === 0 &&
                     <ContenedorSubtitulo>
