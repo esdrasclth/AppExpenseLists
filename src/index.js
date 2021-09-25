@@ -12,8 +12,9 @@ import EditarGasto from './components/EditarGasto'
 import GastosPorCategoria from './components/GastosPorCategoria'
 import favicon from './img/logo.png';
 import Fondo from './elements/Fondo'
-import { AuthProvider } from './contexts/AuthContext';
 import RutaPrivada from './components/RutaPrivada';
+import { AuthProvider } from './contexts/AuthContext';
+import { TotalGastadoProvider } from './contexts/TotalGastadoEnElMesContext'
 
 import './index.css';
 import App from './App';
@@ -34,30 +35,32 @@ const Index = () => {
       </Helmet>
 
       <AuthProvider>
-        <BrowserRouter>
-          <Contenedor>
-            <Switch>
-              <Route path="/iniciar-sesion" component={InicioSesion} />
-              <Route path="/crear-cuenta" component={RegistroUsuario} />
+        <TotalGastadoProvider>
+          <BrowserRouter>
+            <Contenedor>
+              <Switch>
+                <Route path="/iniciar-sesion" component={InicioSesion} />
+                <Route path="/crear-cuenta" component={RegistroUsuario} />
 
-              <RutaPrivada path="/categorias">
-                <GastosPorCategoria />
-              </RutaPrivada>
+                <RutaPrivada path="/categorias">
+                  <GastosPorCategoria />
+                </RutaPrivada>
 
-              <RutaPrivada path="/lista">
-                <ListaDeGastos />
-              </RutaPrivada>
+                <RutaPrivada path="/lista">
+                  <ListaDeGastos />
+                </RutaPrivada>
 
-              <RutaPrivada path="/editar/:id">
-                <EditarGasto />
-              </RutaPrivada>
+                <RutaPrivada path="/editar/:id">
+                  <EditarGasto />
+                </RutaPrivada>
 
-              <RutaPrivada path="/">
-                <App />
-              </RutaPrivada>
-            </Switch>
-          </Contenedor>
-        </BrowserRouter>
+                <RutaPrivada path="/">
+                  <App />
+                </RutaPrivada>
+              </Switch>
+            </Contenedor>
+          </BrowserRouter>
+        </TotalGastadoProvider>
       </AuthProvider>
 
       <Fondo />
