@@ -31,13 +31,13 @@ const SelectCategorias = ({ categoria, cambiarCategoria }) => {
             {mostrarSelect &&
                 <Opciones>
                     {categorias.map((categoria) => {
-                        return <Opcion 
-                                    key={categoria.id} 
-                                    data-valor={categoria.id} 
-                                    onClick={handleClick}
-                                >
-                                    <IconoCategoria id={categoria.id} /> {categoria.texto}
-                               </Opcion>
+                        return <Opcion
+                            key={categoria.id}
+                            data-valor={categoria.id}
+                            onClick={handleClick}
+                        >
+                            <IconoCategoria id={categoria.id} /> {categoria.texto}
+                        </Opcion>
                     })}
                 </Opciones>
             }

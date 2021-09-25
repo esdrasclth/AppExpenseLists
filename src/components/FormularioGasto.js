@@ -80,19 +80,19 @@ const FormularioGasto = ({ gasto }) => {
                         fecha: getUnixTime(fecha),
                         uidUsuario: usuario.uid
                     })
-                    .then(() => {
-                        cambiarCategoria('hogar');
-                        cambiarInputDescripcion('');
-                        cambiarInputCantidad('');
-                        cambiarFecha(new Date());
+                        .then(() => {
+                            cambiarCategoria('hogar');
+                            cambiarInputDescripcion('');
+                            cambiarInputCantidad('');
+                            cambiarFecha(new Date());
 
-                        cambiarEstadoAlerta(true);
-                        cambiarAlerta({ tipo: 'exito', mensaje: 'El gasto fue agregado correctamente.' })
-                    })
-                    .catch(err => {
-                        cambiarEstadoAlerta(true);
-                        cambiarAlerta({ tipo: 'error', mensaje: 'Ocurrio un error al intentar agregar tu gasto. ' + err })
-                    })
+                            cambiarEstadoAlerta(true);
+                            cambiarAlerta({ tipo: 'exito', mensaje: 'El gasto fue agregado correctamente.' })
+                        })
+                        .catch(err => {
+                            cambiarEstadoAlerta(true);
+                            cambiarAlerta({ tipo: 'error', mensaje: 'Ocurrio un error al intentar agregar tu gasto. ' + err })
+                        })
                 }
 
             } else {

@@ -5,7 +5,7 @@ import convertirAMonedas from '../funciones/convertirAMonedas'
 import { useTotalDelMes } from '../contexts/TotalGastadoEnElMesContext'
 
 const BarraTotalGastado = () => {
-    const {total} = useTotalDelMes();
+    const { total } = useTotalDelMes();
 
     return (
         <BarraTotal>

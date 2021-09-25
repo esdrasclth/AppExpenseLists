@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
-import {Header, Titulo, ContenedorHeader, ContenedorBotones} from './elements/Header'
+import { Header, Titulo, ContenedorHeader, ContenedorBotones } from './elements/Header'
 import Boton from './elements/Boton'
 import BotonCerrarSesion from './elements/BotonCerrarSesion'
 import FormularioGasto from './components/FormularioGasto'

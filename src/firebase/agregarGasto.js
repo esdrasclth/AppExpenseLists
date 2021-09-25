@@ -1,6 +1,6 @@
-import {db} from './firebaseConfig'
+import { db } from './firebaseConfig'
 
-const agregarGasto = ({categoria, cantidad, descripcion, fecha, uidUsuario}) => {
+const agregarGasto = ({ categoria, cantidad, descripcion, fecha, uidUsuario }) => {
     return db.collection('gastos').add({
         categoria: categoria,
         descripcion: descripcion,

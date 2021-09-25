@@ -1,4 +1,4 @@
-import {db} from './firebaseConfig'
+import { db } from './firebaseConfig'
 
 const borrarGasto = (id) => {
     db.collection('gastos').doc(id).delete();

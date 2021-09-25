@@ -26,25 +26,25 @@ function formatDate(date, format) {
 const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',];
 const dias_semana_cortos = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
 
-const DatePicker = ({fecha, cambiarFecha}) => {
-    return ( 
-        <ContenedorInput>
-            <DayPickerInput 
-              value={fecha} 
-              onDayChange={(day) => cambiarFecha(day)} 
-              format="dd 'de' MMMM 'de' yyyy" 
-              formatDate={formatDate} 
-              parseDate={parseDate} 
+const DatePicker = ({ fecha, cambiarFecha }) => {
+  return (
+    <ContenedorInput>
+      <DayPickerInput
+        value={fecha}
+        onDayChange={(day) => cambiarFecha(day)}
+        format="dd 'de' MMMM 'de' yyyy"
+        formatDate={formatDate}
+        parseDate={parseDate}
 
-              dayPickerProps={
-                {
-                  months: meses,
-                  weekdaysShort: dias_semana_cortos
-                }
-              }
-            />
-        </ContenedorInput>
-     );
+        dayPickerProps={
+          {
+            months: meses,
+            weekdaysShort: dias_semana_cortos
+          }
+        }
+      />
+    </ContenedorInput>
+  );
 }
 
 const ContenedorInput = styled.div`
@@ -71,5 +71,5 @@ const ContenedorInput = styled.div`
         }
     }
 `;
- 
+
 export default DatePicker;

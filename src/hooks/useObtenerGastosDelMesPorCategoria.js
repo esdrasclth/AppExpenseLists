@@ -28,7 +28,7 @@ const useObtenerGastosDelMesPorCategoria = () => {
             return { categoria: elemento, cantidad: sumaDeGastos[elemento] }
         }));
     }, [gastos, cambiarGastosPorCategoria])
- 
+
     return gastosPorCategoria;
 }
 

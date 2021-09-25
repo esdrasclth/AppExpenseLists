@@ -10,7 +10,7 @@ import useObtenerGasto from '../hooks/useObtenerGasto'
 
 const EditarGasto = () => {
 
-    const {id} = useParams();
+    const { id } = useParams();
     const [gasto] = useObtenerGasto(id);
 
     return (

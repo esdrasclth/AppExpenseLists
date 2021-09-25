@@ -13,7 +13,7 @@ const useObtenerGastosDelMes = () => {
         const finalDeMes = getUnixTime(endOfMonth(new Date()));
 
         if (usuario) {
-    
+
             const unsuscribe = db.collection('gastos')
                 .orderBy('fecha', 'desc')
                 .where('fecha', '>=', inicioDeMes)
@@ -21,7 +21,7 @@ const useObtenerGastosDelMes = () => {
                 .where('uidUsuario', '==', usuario.uid)
                 .onSnapshot((snapshot) => {
                     establecerGastos(snapshot.docs.map((documento) => {
-                        return {...documento.data(), id: documento.id}
+                        return { ...documento.data(), id: documento.id }
                     }))
                 })
 
